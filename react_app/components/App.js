@@ -1,12 +1,15 @@
 import React from 'react';
 import ToolBar from './ToolBar';
+import Playground from '../containers/Playground';
 
-export default () => {
-  const mainApp = (
-    <div>
-      <ToolBar />
-      <p> Playground will go here </p>
-    </div>
-  );
-  return mainApp;
-};
+export default class App extends React.Component {
+  render() {
+    const mainApp = (
+      <div>
+        <ToolBar />
+        <Playground />
+      </div>
+    );
+    return mainApp;
+  }
+}
