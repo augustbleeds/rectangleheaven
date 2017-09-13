@@ -5,7 +5,7 @@ export default () => {
   const mainApp = (
     <div>
       <ToolBar />
-      <p> Plyground will go here </p>
+      <p> Playground will go here </p>
     </div>
   );
   return mainApp;
