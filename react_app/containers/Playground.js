@@ -1,6 +1,10 @@
 import React from 'react';
 import Draggable from 'react-draggable';
 
+/*
+So, on drag, the coordinates change.
+ */
+
 export default class Playground extends React.Component {
   constructor(props) {
     super(props);
@@ -22,12 +26,13 @@ export default class Playground extends React.Component {
     return (
       <div>
         {this.state.rectangles.map(({ x, y }) => {
+          console.log('hi');
           const val = (
             <Draggable
               key="test"
               defaultPosition={{ x, y }}
               position={null}
-              onDrag={(e, data) => this.eventLogger(data)}
+              onStop={(e, data) => this.eventLogger(data)}
             >
               <div style={{ backgroundColor: 'blue', height: 100, width: 100 }}>
                 HELLO IM DRAGGABLE
