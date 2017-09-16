@@ -1,10 +1,5 @@
 import React from 'react';
-// import Draggable from 'react-draggable';
 import Rectangle from '../components/Rectangle';
-
-/*
-So, on drag, the coordinates change.
- */
 
 export default class Playground extends React.Component {
   constructor(props) {
@@ -13,12 +8,11 @@ export default class Playground extends React.Component {
     this.state = { rectangles: x };
   }
 
-  eventLogger(data) {
+  saveNewLocation(data) {
     const newRectangle = Object.assign({}, this.state.rectangles[0], { x: data.x, y: data.y });
     this.setState({ rectangles: [newRectangle] });
     localStorage.setItem('rectangles', JSON.stringify([newRectangle]));
   }
-
 
   render() {
     return (
@@ -29,7 +23,7 @@ export default class Playground extends React.Component {
               key="test"
               x={x}
               y={y}
-              adjustPosition={data => this.eventLogger(data)}
+              adjustPosition={data => this.saveNewLocation(data)}
             />
           );
           return rectangle;
