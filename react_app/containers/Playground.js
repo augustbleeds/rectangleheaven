@@ -13,17 +13,8 @@ class Playground extends React.Component {
     this.state = {};
   }
 
-  // saveLayoutToCache() {
-  //   const { rectangles } = this.props;
-  //   // console.log('rectangles are', rectangles);
-  //   localStorage.setItem('rectangles', JSON.stringify(rectangles));
-  // }
-
   render() {
-    // this.saveLayoutToCache();
     const { rectangles, adjustLocation, addOneRectangle } = this.props;
-    // console.log('storage', JSON.parse(localStorage.getItem('rectangles')));
-    // console.log('rectangle is', rectangles);
     return (
       <div style={{ backgroundColor: 'skyblue', height: 500, alignSelf: 'stretch' }} >
         <ToolBar
@@ -50,10 +41,7 @@ Playground.propTypes = {
   adjustLocation: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ rectangles, isExistingLayout }) => ({
-  rectangles,
-  isExistingLayout,
-});
+const mapStateToProps = rectangles => ({ rectangles });
 
 const mapDispatchToProps = dispatch => ({
   addOneRectangle: () => dispatch(addRectangle()),
