@@ -9,9 +9,10 @@ export default (state = initialState, action) => {
     case 'ADD_RECTANGLE':
       return state.concat({ x: 100, y: 100, height: 50, width: 100, id: uuidv1() });
     case 'SAVE_LOCATION': {
-      const { data, index } = action.payload;
+      const { data, id } = action.payload;
+      const modifyIndex = _.findIndex(state, { id });
       const newState = state.slice();
-      newState[index] = Object.assign({}, newState[index], { x: data.x, y: data.y });
+      newState[modifyIndex] = Object.assign({}, newState[modifyIndex], { x: data.x, y: data.y });
       return newState;
     }
     case 'DELETE_RECTANGLE': {

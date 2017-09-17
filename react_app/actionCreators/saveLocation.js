@@ -1,4 +1,7 @@
-export default (data, index) => ({
+export default (data, id) => ({
   type: 'SAVE_LOCATION',
-  payload: { data, index },
+  payload: {
+    data,
+    id,
+  },
 });

@@ -21,14 +21,14 @@ class Playground extends React.Component {
         <ToolBar
           createNew={() => addOneRectangle()}
         />
-        {rectangles.map(({ x, y, height, width, id }, index) => ((
+        {rectangles.map(({ x, y, height, width, id }) => ((
           <Rectangle
             key={id}
             height={height}
             width={width}
             x={x}
             y={y}
-            adjustPosition={data => adjustLocation(data, index)}
+            adjustPosition={data => adjustLocation(data, id)}
             remove={() => removeRectangle(id)}
           />
         )),
