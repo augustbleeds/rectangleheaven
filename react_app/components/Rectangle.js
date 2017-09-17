@@ -1,7 +1,7 @@
 import React from 'react';
 import Draggable from 'react-draggable';
 
-export default ({ height, width, x, y, adjustPosition }) => {
+export default ({ height, width, x, y, adjustPosition, remove }) => {
   const rectangle = (
     <Draggable
       bounds="parent"
@@ -11,7 +11,9 @@ export default ({ height, width, x, y, adjustPosition }) => {
     >
       <div
         style={{ backgroundColor: 'white', height, width, position: 'absolute' }}
-      />
+      >
+        <button onClick={() => remove()} >X</button>
+      </div>
     </Draggable>
   );
   return rectangle;
