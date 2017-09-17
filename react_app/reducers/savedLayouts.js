@@ -1,4 +1,4 @@
-const initialState = {};
+const initialState = { hi: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -7,6 +7,7 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { [layoutName]: rectangles });
     }
     default:
+      break;
   }
   return state;
 };
