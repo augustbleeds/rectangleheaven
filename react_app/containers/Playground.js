@@ -6,6 +6,7 @@ import Rectangle from '../components/Rectangle';
 import addRectangle from '../actionCreators/addRectangle';
 import saveLocation from '../actionCreators/saveLocation';
 import deleteRectangle from '../actionCreators/deleteRectangle';
+import clearLayout from '../actionCreators/clearLayout';
 
 
 class Playground extends React.Component {
@@ -15,11 +16,13 @@ class Playground extends React.Component {
   }
 
   render() {
-    const { rectangles, adjustLocation, addOneRectangle, removeRectangle } = this.props;
+    const { rectangles, adjustLocation, addOneRectangle, removeRectangle, clearArea } = this.props;
     return (
       <div style={{ backgroundColor: 'skyblue', height: 500, alignSelf: 'stretch' }} >
         <ToolBar
           createNew={() => addOneRectangle()}
+          clearAll={() => clearArea()}
+          layoutNames={['hi', 'bye', 'aloha']}
         />
         {rectangles.map(({ x, y, height, width, id }) => ((
           <Rectangle
@@ -43,6 +46,7 @@ Playground.propTypes = {
   addOneRectangle: PropTypes.func.isRequired,
   adjustLocation: PropTypes.func.isRequired,
   removeRectangle: PropTypes.func.isRequired,
+  clearArea: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = rectangles => ({ rectangles });
@@ -51,6 +55,7 @@ const mapDispatchToProps = dispatch => ({
   addOneRectangle: () => dispatch(addRectangle()),
   adjustLocation: (data, index) => dispatch(saveLocation(data, index)),
   removeRectangle: id => dispatch(deleteRectangle(id)),
+  clearArea: () => dispatch(clearLayout()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playground);

@@ -22,6 +22,12 @@ export default (state = initialState, action) => {
       newState.splice(deleteIndex, 1);
       return newState;
     }
+    case 'CLEAR_LAYOUT':
+      return [];
+    case 'SWITCH_LAYOUT': {
+      const { switchState } = action.payload;
+      return switchState;
+    }
     default:
       break;
   }
