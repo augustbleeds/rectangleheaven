@@ -7,6 +7,7 @@ export default class Playground extends React.Component {
     super(props);
     const rectangles = JSON.parse(localStorage.getItem('rectangles')) || [];
     this.state = { rectangles };
+    console.log(this.state);
   }
 
   saveLocation(data, index) {
@@ -23,18 +24,36 @@ export default class Playground extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
-      <div>
-        <ToolBar />
-        {this.state.rectangles.map(({ x, y }, index) => ((
+      <div style={{ backgroundColor: 'gray', height: 500, alignSelf: 'stretch' }} >
+        <ToolBar
+          createNew={() => this.addSquare()}
+        />
+        {this.state.rectangles.map(({ x, y, height, width }, index) => ((
           <Rectangle
-            key="test"
+            height={height}
+            width={width}
             x={x}
             y={y}
             adjustPosition={data => this.saveLocation(data, index)}
           />
         )),
         )}
+        {/* <Rectangle
+          height={50}
+          width={50}
+          x={50}
+          y={50}
+          adjustPosition={data => this.saveLocation(data)}
+        />
+        <Rectangle
+          height={50}
+          width={50}
+          x={50}
+          y={50}
+          adjustPosition={data => this.saveLocation(data)}
+        /> */}
       </div>
     );
   }

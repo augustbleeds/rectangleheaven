@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default () => {
+export default ({ createNew }) => {
   const toolBar = (
-    <button> Create new </button>
+    <button onClick={() => createNew()}> Create new </button>
   );
   return toolBar;
 };
