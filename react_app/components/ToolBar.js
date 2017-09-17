@@ -1,13 +1,13 @@
 import React from 'react';
+import SaveBar from './SaveBar';
 
-export default ({ createNew, clearAll, layoutNames, switchArea }) => {
+export default ({ createNew, clearAll, layoutNames, switchArea, currentLayoutName, saveArea }) => {
   const toolBar = (
     <div>
       <button onClick={() => createNew()}> Add Rectangle </button>
-      <button onClick={() => clearAll()}> Clear All </button>
+      <button onClick={() => clearAll()}> Clear Layout </button>
 
-      <button> Save As </button>
-      <button> Save </button>
+      <SaveBar name={currentLayoutName} save={layoutName => saveArea(layoutName)} />
 
       <select onChange={e => switchArea(e.target.value)} >
         <option

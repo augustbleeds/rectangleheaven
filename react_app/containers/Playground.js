@@ -38,8 +38,9 @@ class Playground extends React.Component {
           createNew={() => addOneRectangle()}
           clearAll={() => clearArea()}
           layoutNames={layoutNames}
-          saveArea={() => saveArea()}
+          saveArea={layoutName => saveArea(rectangles, layoutName)}
           switchArea={name => this.switch(name)}
+          currentLayoutName={this.state.layoutName}
         />
         {rectangles.map(({ x, y, height, width, id }) => ((
           <Rectangle
