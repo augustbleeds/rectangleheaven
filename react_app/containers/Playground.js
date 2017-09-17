@@ -49,7 +49,7 @@ Playground.propTypes = {
   clearArea: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = rectangles => ({ rectangles });
+const mapStateToProps = ({ rectangles }) => ({ rectangles });
 
 const mapDispatchToProps = dispatch => ({
   addOneRectangle: () => dispatch(addRectangle()),

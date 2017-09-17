@@ -1,4 +1,10 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import currentLayout from './reducers/currentLayout';
+import savedLayouts from './reducers/savedLayouts';
 
-export default data => createStore(currentLayout, data);
+const reducer = combineReducers({
+  rectangles: currentLayout,
+  savedLayouts,
+});
+
+export default data => createStore(reducer, data);
