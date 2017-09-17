@@ -7,7 +7,6 @@ export default class Playground extends React.Component {
     super(props);
     const rectangles = JSON.parse(localStorage.getItem('rectangles')) || [];
     this.state = { rectangles };
-    console.log(this.state);
   }
 
   saveLocation(data, index) {
@@ -18,15 +17,14 @@ export default class Playground extends React.Component {
   }
 
   addSquare() {
-    this.setState({
-      rectangles: this.state.rectangles.concat({ x: 100, y: 200, height: 50, width: 50 }),
-    });
+    const temp = this.state.rectangles.concat({ x: 100, y: 200, height: 50, width: 50 });
+    this.setState({ rectangles: temp });
+    localStorage.setItem('rectangles', JSON.stringify(temp));
   }
 
   render() {
-    console.log(this.state);
     return (
-      <div style={{ backgroundColor: 'gray', height: 500, alignSelf: 'stretch' }} >
+      <div style={{ backgroundColor: 'skyblue', height: 500, alignSelf: 'stretch' }} >
         <ToolBar
           createNew={() => this.addSquare()}
         />
@@ -40,20 +38,6 @@ export default class Playground extends React.Component {
           />
         )),
         )}
-        {/* <Rectangle
-          height={50}
-          width={50}
-          x={50}
-          y={50}
-          adjustPosition={data => this.saveLocation(data)}
-        />
-        <Rectangle
-          height={50}
-          width={50}
-          x={50}
-          y={50}
-          adjustPosition={data => this.saveLocation(data)}
-        /> */}
       </div>
     );
   }
