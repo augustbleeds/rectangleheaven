@@ -1,4 +1,4 @@
 import { createStore } from 'redux';
-import currentLayoutReducer from './reducers/currentLayout';
+import currentLayout from './reducers/currentLayout';
 
-export default data => createStore(currentLayoutReducer, data);
+export default data => createStore(currentLayout, data);

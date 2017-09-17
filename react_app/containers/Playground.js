@@ -1,40 +1,41 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import addRectangle from '../actionCreators/addRectangle';
+import saveLocation from '../actionCreators/saveLocation';
 import ToolBar from '../components/ToolBar';
 import Rectangle from '../components/Rectangle';
 
-export default class Playground extends React.Component {
+
+class Playground extends React.Component {
   constructor(props) {
     super(props);
-    const rectangles = JSON.parse(localStorage.getItem('rectangles')) || [];
-    this.state = { rectangles };
+    this.state = {};
   }
 
-  saveLocation(data, index) {
-    const temp = this.state.rectangles.slice();
-    temp[index] = Object.assign({}, temp[index], { x: data.x, y: data.y });
-    this.setState({ rectangles: temp });
-    localStorage.setItem('rectangles', JSON.stringify(temp));
-  }
-
-  addSquare() {
-    const temp = this.state.rectangles.concat({ x: 100, y: 200, height: 50, width: 50 });
-    this.setState({ rectangles: temp });
-    localStorage.setItem('rectangles', JSON.stringify(temp));
-  }
+  // saveLayoutToCache() {
+  //   const { rectangles } = this.props;
+  //   // console.log('rectangles are', rectangles);
+  //   localStorage.setItem('rectangles', JSON.stringify(rectangles));
+  // }
 
   render() {
+    // this.saveLayoutToCache();
+    const { rectangles, adjustLocation, addOneRectangle } = this.props;
+    // console.log('storage', JSON.parse(localStorage.getItem('rectangles')));
+    // console.log('rectangle is', rectangles);
     return (
       <div style={{ backgroundColor: 'skyblue', height: 500, alignSelf: 'stretch' }} >
         <ToolBar
-          createNew={() => this.addSquare()}
+          createNew={() => addOneRectangle()}
         />
-        {this.state.rectangles.map(({ x, y, height, width }, index) => ((
+        {rectangles.map(({ x, y, height, width }, index) => ((
           <Rectangle
             height={height}
             width={width}
             x={x}
             y={y}
-            adjustPosition={data => this.saveLocation(data, index)}
+            adjustPosition={data => adjustLocation(data, index)}
           />
         )),
         )}
@@ -42,3 +43,21 @@ export default class Playground extends React.Component {
     );
   }
 }
+
+Playground.propTypes = {
+  rectangles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addOneRectangle: PropTypes.func.isRequired,
+  adjustLocation: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = ({ rectangles, isExistingLayout }) => ({
+  rectangles,
+  isExistingLayout,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addOneRectangle: () => dispatch(addRectangle()),
+  adjustLocation: (data, index) => dispatch(saveLocation(data, index)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Playground);
