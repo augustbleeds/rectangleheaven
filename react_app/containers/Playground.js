@@ -13,13 +13,15 @@ import switchLayout from '../actionCreators/switchLayout';
 class Playground extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { layoutName: null };
+    const layoutName = JSON.parse(localStorage.getItem('layoutName')) || null;
+    this.state = { layoutName };
   }
 
   switch(name) {
     const switchRectangles = this.props.savedLayouts[name].slice();
     this.props.switchArea(switchRectangles);
     this.setState({ layoutName: name });
+    localStorage.setItem('layoutName', JSON.stringify(name));
   }
 
   render() {
