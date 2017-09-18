@@ -1,4 +1,8 @@
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 import SaveBar from './SaveBar';
 
 export default ({
@@ -10,29 +14,20 @@ export default ({
   saveArea,
   deleteArea }) => {
   const toolBar = (
-    <div>
-      <button onClick={() => createNew()}> Add Rectangle </button>
-      <button onClick={() => clearAll()}> Reset Layout </button>
-
+    <Toolbar>
+      <ToolbarGroup firstChild>
+        <RaisedButton label="Add Rectangle" onClick={() => createNew()} />
+        <RaisedButton label="Reset Layout" onClick={() => clearAll()} />
+      </ToolbarGroup>
       <SaveBar name={currentLayoutName} save={layoutName => saveArea(layoutName)} />
-
-      <button onClick={() => deleteArea()}> Delete Layout </button>
-
-      <select
-        value={currentLayoutName}
-        onChange={e => switchArea(e.target.value)}
-      >
-        <option
-          value={''}
-          disabled
-          hidden
-        >
-          Select Layout
-        </option>
-        {layoutNames.map(name => <option key={name} value={name}> {name} </option>)}
-      </select>
-
-    </div>
+      <ToolbarGroup>
+        <RaisedButton label="Delete Layout" onClick={() => deleteArea()} secondary />
+        <DropDownMenu value={currentLayoutName} onChange={(e, k, value) => switchArea(value)}>
+          <MenuItem disabled value="" primaryText="Select Existing Layout" />
+          {layoutNames.map(name => <MenuItem key={name} value={name} primaryText={name} />)}
+        </DropDownMenu>
+      </ToolbarGroup>
+    </Toolbar>
   );
   return toolBar;
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
+import RaisedButton from 'material-ui/RaisedButton';
+import { ToolbarGroup } from 'material-ui';
 
 class SaveBar extends React.Component {
   constructor(props) {
@@ -39,9 +41,9 @@ class SaveBar extends React.Component {
 
   render() {
     return (
-      <div style={{ display: 'inline-block' }}>
-        <button onClick={() => this.handleSave('Save Layout As')}> Save Layout As </button>
-        <button onClick={() => this.handleSave('Save Layout')}> Save Layout </button>
+      <ToolbarGroup>
+        <RaisedButton label="Save Layout As" primary onClick={() => this.handleSave('Save Layout As')} />
+        <RaisedButton label="Save Layout" primary onClick={() => this.handleSave('Save Layout')} />
         <Modal
           isOpen={this.state.modalOpen}
           contentLabel="SaveOptions"
@@ -49,7 +51,7 @@ class SaveBar extends React.Component {
           <input type="text" placeholder="Layout Name" onChange={e => this.handleInput(e)} />
           <button onClick={() => this.handleModalSubmit()}> {this.state.buttonText} </button>
         </Modal>
-      </div>
+      </ToolbarGroup>
     );
   }
 }
