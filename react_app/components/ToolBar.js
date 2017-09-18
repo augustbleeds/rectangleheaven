@@ -1,8 +1,10 @@
 import React from 'react';
+import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import Drawer from 'material-ui/Drawer';
 import SaveBar from './SaveBar';
 
 export default ({
@@ -16,8 +18,8 @@ export default ({
   const toolBar = (
     <Toolbar>
       <ToolbarGroup firstChild>
-        <RaisedButton label="Add Rectangle" onClick={() => createNew()} />
-        <RaisedButton label="Reset Layout" onClick={() => clearAll()} />
+        <FlatButton label="Add Rectangle" onClick={() => createNew()} />
+        <FlatButton label="Reset Layout" onClick={() => clearAll()} />
       </ToolbarGroup>
       <SaveBar name={currentLayoutName} save={layoutName => saveArea(layoutName)} />
       <ToolbarGroup>
@@ -27,6 +29,11 @@ export default ({
           {layoutNames.map(name => <MenuItem key={name} value={name} primaryText={name} />)}
         </DropDownMenu>
       </ToolbarGroup>
+      <Drawer open={false}>
+        <MenuItem>Menu Item</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+      </Drawer>
+
     </Toolbar>
   );
   return toolBar;
