@@ -1,13 +1,22 @@
 import React from 'react';
 import SaveBar from './SaveBar';
 
-export default ({ createNew, clearAll, layoutNames, switchArea, currentLayoutName, saveArea }) => {
+export default ({
+  createNew,
+  clearAll,
+  layoutNames,
+  switchArea,
+  currentLayoutName,
+  saveArea,
+  deleteArea }) => {
   const toolBar = (
     <div>
       <button onClick={() => createNew()}> Add Rectangle </button>
-      <button onClick={() => clearAll()}> Clear Layout </button>
+      <button onClick={() => clearAll()}> Reset Layout </button>
 
       <SaveBar name={currentLayoutName} save={layoutName => saveArea(layoutName)} />
+
+      <button onClick={() => deleteArea()}> Delete Layout </button>
 
       <select
         value={currentLayoutName}

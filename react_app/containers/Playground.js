@@ -9,6 +9,7 @@ import deleteRectangle from '../actionCreators/deleteRectangle';
 import clearLayout from '../actionCreators/clearLayout';
 import saveLayout from '../actionCreators/saveLayout';
 import switchLayout from '../actionCreators/switchLayout';
+import deleteLayout from '../actionCreators/deleteLayout';
 
 class Playground extends React.Component {
   switch(switchName) {
@@ -24,7 +25,9 @@ class Playground extends React.Component {
       removeRectangle,
       clearArea,
       saveArea,
-      savedLayouts } = this.props;
+      savedLayouts,
+      currentLayoutName,
+      deleteArea } = this.props;
     const layoutNames = Object.keys(savedLayouts);
     return (
       <div style={{ backgroundColor: 'skyblue', height: 500, alignSelf: 'stretch' }} >
@@ -34,7 +37,8 @@ class Playground extends React.Component {
           layoutNames={layoutNames}
           saveArea={layoutName => saveArea(rectangles, layoutName)}
           switchArea={name => this.switch(name)}
-          currentLayoutName={this.props.currentLayoutName}
+          currentLayoutName={currentLayoutName}
+          deleteArea={() => deleteArea(currentLayoutName)}
         />
         {rectangles.map(({ x, y, height, width, id }) => ((
           <Rectangle
@@ -63,6 +67,7 @@ Playground.propTypes = {
   switchArea: PropTypes.func.isRequired,
   savedLayouts: PropTypes.object.isRequired,
   currentLayoutName: PropTypes.string.isRequired,
+  deleteArea: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ rectangles, savedLayouts, currentLayoutName }) => ({
@@ -78,6 +83,7 @@ const mapDispatchToProps = dispatch => ({
   clearArea: () => dispatch(clearLayout()),
   saveArea: (rectangles, layoutName) => dispatch(saveLayout(rectangles, layoutName)),
   switchArea: (rectangles, name) => dispatch(switchLayout(rectangles, name)),
+  deleteArea: name => dispatch(deleteLayout(name)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playground);

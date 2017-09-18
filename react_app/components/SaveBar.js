@@ -9,7 +9,7 @@ class SaveBar extends React.Component {
   }
 
   handleSave(text) {
-    if (!this.props.name || text === 'Save As') {
+    if (!this.props.name || text === 'Save Layout As') {
       this.openModal(text);
     } else {
       this.props.save(this.props.name);
@@ -39,9 +39,9 @@ class SaveBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={() => this.handleSave('Save As')}> Save As </button>
-        <button onClick={() => this.handleSave('Save')}> Save </button>
+      <div style={{ display: 'inline-block' }}>
+        <button onClick={() => this.handleSave('Save Layout As')}> Save Layout As </button>
+        <button onClick={() => this.handleSave('Save Layout')}> Save Layout </button>
         <Modal
           isOpen={this.state.modalOpen}
           contentLabel="SaveOptions"

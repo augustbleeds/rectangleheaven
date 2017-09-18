@@ -22,6 +22,7 @@ export default (state = initialState, action) => {
       newState.splice(deleteIndex, 1);
       return newState;
     }
+    case 'DELETE_LAYOUT':
     case 'CLEAR_LAYOUT':
       return [];
     case 'SWITCH_LAYOUT': {

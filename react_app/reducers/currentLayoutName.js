@@ -6,6 +6,9 @@ export default (state = initialState, action) => {
       const { switchName } = action.payload;
       return switchName;
     }
+    case 'DELETE_LAYOUT': {
+      return '';
+    }
     default:
   }
   return state;
