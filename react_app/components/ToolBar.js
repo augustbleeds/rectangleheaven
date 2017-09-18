@@ -9,10 +9,12 @@ export default ({ createNew, clearAll, layoutNames, switchArea, currentLayoutNam
 
       <SaveBar name={currentLayoutName} save={layoutName => saveArea(layoutName)} />
 
-      <select onChange={e => switchArea(e.target.value)} >
+      <select
+        value={currentLayoutName}
+        onChange={e => switchArea(e.target.value)}
+      >
         <option
-          value=""
-          selected
+          value={''}
           disabled
           hidden
         >

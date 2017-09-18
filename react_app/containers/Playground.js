@@ -11,17 +11,9 @@ import saveLayout from '../actionCreators/saveLayout';
 import switchLayout from '../actionCreators/switchLayout';
 
 class Playground extends React.Component {
-  constructor(props) {
-    super(props);
-    const layoutName = JSON.parse(localStorage.getItem('layoutName')) || null;
-    this.state = { layoutName };
-  }
-
-  switch(name) {
-    const switchRectangles = this.props.savedLayouts[name].slice();
-    this.props.switchArea(switchRectangles);
-    this.setState({ layoutName: name });
-    localStorage.setItem('layoutName', JSON.stringify(name));
+  switch(switchName) {
+    const switchRectangles = this.props.savedLayouts[switchName].slice();
+    this.props.switchArea(switchRectangles, switchName);
   }
 
   render() {
@@ -42,7 +34,7 @@ class Playground extends React.Component {
           layoutNames={layoutNames}
           saveArea={layoutName => saveArea(rectangles, layoutName)}
           switchArea={name => this.switch(name)}
-          currentLayoutName={this.state.layoutName}
+          currentLayoutName={this.props.currentLayoutName}
         />
         {rectangles.map(({ x, y, height, width, id }) => ((
           <Rectangle
@@ -70,9 +62,14 @@ Playground.propTypes = {
   saveArea: PropTypes.func.isRequired,
   switchArea: PropTypes.func.isRequired,
   savedLayouts: PropTypes.object.isRequired,
+  currentLayoutName: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ rectangles, savedLayouts }) => ({ rectangles, savedLayouts });
+const mapStateToProps = ({ rectangles, savedLayouts, currentLayoutName }) => ({
+  rectangles,
+  savedLayouts,
+  currentLayoutName,
+});
 
 const mapDispatchToProps = dispatch => ({
   addOneRectangle: () => dispatch(addRectangle()),
@@ -80,7 +77,7 @@ const mapDispatchToProps = dispatch => ({
   removeRectangle: id => dispatch(deleteRectangle(id)),
   clearArea: () => dispatch(clearLayout()),
   saveArea: (rectangles, layoutName) => dispatch(saveLayout(rectangles, layoutName)),
-  switchArea: rectangles => dispatch(switchLayout(rectangles)),
+  switchArea: (rectangles, name) => dispatch(switchLayout(rectangles, name)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playground);
