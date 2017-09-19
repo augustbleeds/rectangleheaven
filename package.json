@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prod": "webpack -p",
-    "dev": "webpack-dev-server --content-base build/"
+    "dev": "webpack-dev-server --content-base build/",
+    "server": "node backend/server"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/decreaseme/doshare#readme",
   "dependencies": {
+    "express": "^4.15.4",
     "lodash": "^4.17.4",
     "material-ui": "^0.19.1",
     "prop-types": "^15.5.10",
