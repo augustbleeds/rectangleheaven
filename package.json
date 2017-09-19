@@ -24,10 +24,8 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-draggable": "^3.0.3",
     "react-modal": "^2.3.2",
     "react-redux": "^5.0.6",
-    "react-resizable": "^1.7.4",
     "react-rnd": "^7.1.2",
     "redux": "^3.7.2",
     "uuid": "^3.1.0"
