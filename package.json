@@ -8,7 +8,7 @@
     "prod": "webpack -p",
     "dev": "webpack-dev-server --content-base build/",
     "server": "node backend/server",
-    "start": "node bacakend/server"
+    "start": "node backend/server"
   },
   "repository": {
     "type": "git",
