@@ -21,7 +21,11 @@ export default ({
         <FlatButton label="Add Rectangle" onClick={() => createNew()} />
         <FlatButton label="Reset Layout" onClick={() => clearAll()} />
       </ToolbarGroup>
-      <SaveBar name={currentLayoutName} save={layoutName => saveArea(layoutName)} />
+      <SaveBar
+        name={currentLayoutName}
+        // switch={layoutName => switchArea(layoutName)}
+        save={layoutName => saveArea(layoutName)}
+      />
       <ToolbarGroup>
         <RaisedButton label="Delete Layout" onClick={() => deleteArea()} secondary />
         <DropDownMenu value={currentLayoutName} onChange={(e, k, value) => switchArea(value)}>

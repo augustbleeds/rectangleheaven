@@ -13,7 +13,6 @@ import deleteLayout from '../actionCreators/deleteLayout';
 
 class Playground extends React.Component {
   switch(switchName) {
-    console.log('switchName', switchName);
     const switchRectangles = this.props.savedLayouts[switchName].slice();
     this.props.switchArea(switchRectangles, switchName);
   }

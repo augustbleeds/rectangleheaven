@@ -9,6 +9,10 @@ export default (state = initialState, action) => {
     case 'DELETE_LAYOUT': {
       return '';
     }
+    case 'SAVE_LAYOUT': {
+      const { layoutName } = action.payload;
+      return layoutName;
+    }
     default:
   }
   return state;
