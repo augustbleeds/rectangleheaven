@@ -15,6 +15,13 @@ export default (state = initialState, action) => {
       newState[modifyIndex] = Object.assign({}, newState[modifyIndex], { x: data.x, y: data.y });
       return newState;
     }
+    case 'SAVE_SIZE': {
+      const { id, height, width } = action.payload;
+      const modifyIndex = _.findIndex(state, { id });
+      const newState = state.slice();
+      newState[modifyIndex] = Object.assign({}, newState[modifyIndex], { height, width });
+      return newState;
+    }
     case 'DELETE_RECTANGLE': {
       const { id } = action.payload;
       const deleteIndex = _.findIndex(state, { id });

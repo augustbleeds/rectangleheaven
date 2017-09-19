@@ -1,9 +1,10 @@
 import React from 'react';
-import Draggable from 'react-draggable';
+// import Draggable from 'react-draggable';
 import PropTypes from 'prop-types';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import Rnd from 'react-rnd';
 
 
 class Rectangle extends React.Component {
@@ -26,18 +27,15 @@ class Rectangle extends React.Component {
     });
   }
 
-  handleStop(data) {
-    this.props.adjustPosition(data);
-  }
-
   render() {
-    const { height, width, x, y, remove } = this.props;
+    const { height, width, x, y, remove, adjustPosition, adjustDimension } = this.props;
     return (
-      <Draggable
+      <Rnd
         bounds="parent"
-        defaultPosition={{ x, y }}
-        position={null}
-        onStop={(e, data) => this.handleStop(data)}
+        size={{ width, height }}
+        position={{ x, y }}
+        onDragStop={(e, data) => adjustPosition(data)}
+        onResize={(e, direction, ref) => adjustDimension(ref.offsetHeight, ref.offsetWidth)}
       >
         <div
           role="button"
@@ -57,7 +55,7 @@ class Rectangle extends React.Component {
             </Menu>
           </Popover>
         </div>
-      </Draggable>
+      </Rnd>
     );
   }
 }
@@ -69,6 +67,7 @@ Rectangle.propTypes = {
   y: PropTypes.number.isRequired,
   adjustPosition: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
+  adjustDimension: PropTypes.func.isRequired,
 };
 
 export default Rectangle;
