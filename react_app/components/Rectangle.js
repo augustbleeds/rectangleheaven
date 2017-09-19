@@ -4,6 +4,7 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Rnd from 'react-rnd';
+import { GithubPicker } from 'react-color';
 
 
 class Rectangle extends React.Component {
@@ -26,8 +27,12 @@ class Rectangle extends React.Component {
     });
   }
 
+  handleColorChange(color) {
+    this.props.switchColor(color.hex);
+  }
+
   render() {
-    const { height, width, x, y, remove, adjustPosition, adjustDimension } = this.props;
+    const { height, width, x, y, remove, adjustPosition, adjustDimension, color } = this.props;
     return (
       <Rnd
         bounds="parent"
@@ -40,7 +45,7 @@ class Rectangle extends React.Component {
           role="button"
           tabIndex="-1"
           onClick={e => this.handleTouchTap(e)}
-          style={{ backgroundColor: 'white', height, width, position: 'absolute' }}
+          style={{ backgroundColor: color, height, width, position: 'absolute' }}
         >
           <Popover
             open={this.state.open}
@@ -51,6 +56,10 @@ class Rectangle extends React.Component {
           >
             <Menu>
               <MenuItem primaryText="Delete" onClick={() => remove()} />
+              <GithubPicker
+                color={color}
+                onChangeComplete={val => this.handleColorChange(val)}
+              />
             </Menu>
           </Popover>
         </div>
@@ -67,6 +76,8 @@ Rectangle.propTypes = {
   adjustPosition: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
   adjustDimension: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
+  switchColor: PropTypes.func.isRequired,
 };
 
 export default Rectangle;

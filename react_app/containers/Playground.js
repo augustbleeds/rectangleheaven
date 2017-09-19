@@ -11,6 +11,7 @@ import saveLayout from '../actionCreators/saveLayout';
 import switchLayout from '../actionCreators/switchLayout';
 import deleteLayout from '../actionCreators/deleteLayout';
 import saveSize from '../actionCreators/saveSize';
+import changeColor from '../actionCreators/changeColor';
 
 class Playground extends React.Component {
   switch(switchName) {
@@ -29,7 +30,8 @@ class Playground extends React.Component {
       savedLayouts,
       currentLayoutName,
       deleteArea,
-      adjustSize } = this.props;
+      adjustSize,
+      modifyColor } = this.props;
     const layoutNames = Object.keys(savedLayouts);
     return (
       <div style={{ backgroundColor: 'skyblue', height: 500, alignSelf: 'stretch' }} >
@@ -42,8 +44,10 @@ class Playground extends React.Component {
           currentLayoutName={currentLayoutName}
           deleteArea={() => deleteArea(currentLayoutName)}
         />
-        {rectangles.map(({ x, y, height, width, id }) => ((
+        {rectangles.map(({ color, x, y, height, width, id }) => ((
           <Rectangle
+            switchColor={myColor => modifyColor(id, myColor)}
+            color={color}
             key={id}
             height={height}
             width={width}
@@ -72,6 +76,7 @@ Playground.propTypes = {
   currentLayoutName: PropTypes.string.isRequired,
   deleteArea: PropTypes.func.isRequired,
   adjustSize: PropTypes.func.isRequired,
+  modifyColor: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ rectangles, savedLayouts, currentLayoutName }) => ({
@@ -89,6 +94,7 @@ const mapDispatchToProps = dispatch => ({
   switchArea: (rectangles, name) => dispatch(switchLayout(rectangles, name)),
   deleteArea: name => dispatch(deleteLayout(name)),
   adjustSize: (id, height, width) => dispatch(saveSize(id, height, width)),
+  modifyColor: (id, color) => dispatch(changeColor(id, color)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playground);
