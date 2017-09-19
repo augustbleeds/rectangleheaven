@@ -23,7 +23,6 @@ export default ({
       </ToolbarGroup>
       <SaveBar
         name={currentLayoutName}
-        // switch={layoutName => switchArea(layoutName)}
         save={layoutName => saveArea(layoutName)}
       />
       <ToolbarGroup>
