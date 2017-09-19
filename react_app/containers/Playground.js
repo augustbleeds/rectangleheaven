@@ -34,7 +34,7 @@ class Playground extends React.Component {
       modifyColor } = this.props;
     const layoutNames = Object.keys(savedLayouts);
     return (
-      <div style={{ backgroundColor: 'skyblue', height: 500, alignSelf: 'stretch' }} >
+      <div>
         <ToolBar
           createNew={() => addOneRectangle()}
           clearAll={() => clearArea()}
@@ -44,21 +44,23 @@ class Playground extends React.Component {
           currentLayoutName={currentLayoutName}
           deleteArea={() => deleteArea(currentLayoutName)}
         />
-        {rectangles.map(({ color, x, y, height, width, id }) => ((
-          <Rectangle
-            switchColor={myColor => modifyColor(id, myColor)}
-            color={color}
-            key={id}
-            height={height}
-            width={width}
-            x={x}
-            y={y}
-            adjustPosition={data => adjustLocation(data, id)}
-            adjustDimension={(h, w) => adjustSize(id, h, w)}
-            remove={() => removeRectangle(id)}
-          />
-        )),
-        )}
+        <div style={{ backgroundColor: 'skyblue', height: 500, alignSelf: 'stretch' }} >
+          {rectangles.map(({ color, x, y, height, width, id }) => ((
+            <Rectangle
+              switchColor={myColor => modifyColor(id, myColor)}
+              color={color}
+              key={id}
+              height={height}
+              width={width}
+              x={x}
+              y={y}
+              adjustPosition={data => adjustLocation(data, id)}
+              adjustDimension={(h, w) => adjustSize(id, h, w)}
+              remove={() => removeRectangle(id)}
+            />
+          )),
+          )}
+        </div>
       </div>
     );
   }
