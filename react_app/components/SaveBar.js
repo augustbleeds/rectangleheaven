@@ -8,6 +8,30 @@ class SaveBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { modalOpen: false, buttonText: '', inputName: '' };
+    this.styles = {
+      overlay: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(255, 255, 255, 0.75)',
+      },
+      content: {
+        position: 'absolute',
+        top: '40px',
+        left: '40px',
+        right: '40px',
+        bottom: '40px',
+        border: '1px solid #ccc',
+        background: '#fff',
+        overflow: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        borderRadius: '4px',
+        outline: 'none',
+        padding: '20px',
+      },
+    };
   }
 
   handleSave(text) {
@@ -47,6 +71,7 @@ class SaveBar extends React.Component {
         <Modal
           isOpen={this.state.modalOpen}
           contentLabel="SaveOptions"
+          style={this.styles}
         >
           <input type="text" placeholder="Layout Name" onChange={e => this.handleInput(e)} />
           <button onClick={() => this.handleModalSubmit()}> {this.state.buttonText} </button>

@@ -44,7 +44,7 @@ class Rectangle extends React.Component {
         <div
           role="button"
           tabIndex="-1"
-          onClick={e => this.handleTouchTap(e)}
+          onDoubleClick={e => this.handleTouchTap(e)}
           style={{ backgroundColor: color, height, width, position: 'absolute' }}
         >
           <Popover
