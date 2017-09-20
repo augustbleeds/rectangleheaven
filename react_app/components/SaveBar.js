@@ -1,37 +1,15 @@
 import React from 'react';
-import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import { ToolbarGroup } from 'material-ui';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 class SaveBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { modalOpen: false, buttonText: '', inputName: '' };
-    this.styles = {
-      overlay: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(255, 255, 255, 0.75)',
-      },
-      content: {
-        position: 'absolute',
-        top: '40px',
-        left: '40px',
-        right: '40px',
-        bottom: '40px',
-        border: '1px solid #ccc',
-        background: '#fff',
-        overflow: 'auto',
-        WebkitOverflowScrolling: 'touch',
-        borderRadius: '4px',
-        outline: 'none',
-        padding: '20px',
-      },
-    };
   }
 
   handleSave(text) {
@@ -57,6 +35,10 @@ class SaveBar extends React.Component {
 
   handleModalSubmit() {
     this.props.save(this.state.inputName);
+    this.handleClose();
+  }
+
+  handleClose() {
     this.setState({
       modalOpen: false,
       buttonText: '',
@@ -64,18 +46,30 @@ class SaveBar extends React.Component {
   }
 
   render() {
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary
+        onClick={() => this.handleClose()}
+      />,
+      <FlatButton
+        label="Submit"
+        primary
+        onClick={() => this.handleModalSubmit()}
+      />,
+    ];
     return (
       <ToolbarGroup>
         <RaisedButton label="Save Layout As" primary onClick={() => this.handleSave('Save Layout As')} />
         <RaisedButton label="Save Layout" primary onClick={() => this.handleSave('Save Layout')} />
-        <Modal
-          isOpen={this.state.modalOpen}
-          contentLabel="SaveOptions"
-          style={this.styles}
+        <Dialog
+          title={this.state.buttonText}
+          actions={actions}
+          modal
+          open={this.state.modalOpen}
         >
-          <input type="text" placeholder="Layout Name" onChange={e => this.handleInput(e)} />
-          <button onClick={() => this.handleModalSubmit()}> {this.state.buttonText} </button>
-        </Modal>
+          <TextField hintText="Layout Name" onChange={e => this.handleInput(e)} />
+        </Dialog>
       </ToolbarGroup>
     );
   }
