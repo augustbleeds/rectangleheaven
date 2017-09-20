@@ -32,7 +32,16 @@ class Rectangle extends React.Component {
   }
 
   render() {
-    const { height, width, x, y, remove, adjustPosition, adjustDimension, color } = this.props;
+    const {
+      height,
+      width,
+      x,
+      y,
+      remove,
+      adjustPosition,
+      adjustDimension,
+      color,
+      addNewCopy } = this.props;
     return (
       <Rnd
         bounds="parent"
@@ -56,6 +65,7 @@ class Rectangle extends React.Component {
           >
             <Menu>
               <MenuItem primaryText="Delete" onClick={() => remove()} />
+              <MenuItem primaryText="Copy" onClick={() => addNewCopy()} />
               <GithubPicker
                 color={color}
                 onChangeComplete={val => this.handleColorChange(val)}
@@ -78,6 +88,7 @@ Rectangle.propTypes = {
   adjustDimension: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
   switchColor: PropTypes.func.isRequired,
+  addNewCopy: PropTypes.func.isRequired,
 };
 
 export default Rectangle;

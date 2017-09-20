@@ -7,7 +7,7 @@ const initialState = [];
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_RECTANGLE':
-      return state.concat({ color: '#fff', x: 100, y: 100, height: 50, width: 100, id: uuidv1() });
+      return state.concat({ color: '#fff', x: 50, y: 50, height: 100, width: 100, id: uuidv1() });
     case 'SAVE_LOCATION': {
       const { data, id } = action.payload;
       const modifyIndex = _.findIndex(state, { id });
@@ -41,6 +41,13 @@ export default (state = initialState, action) => {
       const modifyIndex = _.findIndex(state, { id });
       const newState = state.slice();
       newState[modifyIndex] = Object.assign({}, newState[modifyIndex], { color });
+      return newState;
+    }
+    case 'COPY_RECTANGLE': {
+      const { id } = action.payload;
+      const copyIndex = _.findIndex(state, { id });
+      const copyRectangle = Object.assign({}, state[copyIndex], { id: uuidv1() });
+      const newState = state.concat(copyRectangle);
       return newState;
     }
     default:

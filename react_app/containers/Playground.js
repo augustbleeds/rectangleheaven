@@ -12,6 +12,7 @@ import switchLayout from '../actionCreators/switchLayout';
 import deleteLayout from '../actionCreators/deleteLayout';
 import saveSize from '../actionCreators/saveSize';
 import changeColor from '../actionCreators/changeColor';
+import copyRectangle from '../actionCreators/copyRectangle';
 
 class Playground extends React.Component {
   switch(switchName) {
@@ -31,7 +32,8 @@ class Playground extends React.Component {
       currentLayoutName,
       deleteArea,
       adjustSize,
-      modifyColor } = this.props;
+      modifyColor,
+      duplicateRectangle } = this.props;
     const layoutNames = Object.keys(savedLayouts);
     return (
       <div>
@@ -44,7 +46,7 @@ class Playground extends React.Component {
           currentLayoutName={currentLayoutName}
           deleteArea={() => deleteArea(currentLayoutName)}
         />
-        <div style={{ backgroundColor: 'skyblue', height: 500, alignSelf: 'stretch' }} >
+        <div style={{ backgroundColor: 'skyblue', height: 650, alignSelf: 'stretch' }} >
           {rectangles.map(({ color, x, y, height, width, id }) => ((
             <Rectangle
               switchColor={myColor => modifyColor(id, myColor)}
@@ -56,6 +58,7 @@ class Playground extends React.Component {
               y={y}
               adjustPosition={data => adjustLocation(data, id)}
               adjustDimension={(h, w) => adjustSize(id, h, w)}
+              addNewCopy={() => duplicateRectangle(id)}
               remove={() => removeRectangle(id)}
             />
           )),
@@ -79,6 +82,7 @@ Playground.propTypes = {
   deleteArea: PropTypes.func.isRequired,
   adjustSize: PropTypes.func.isRequired,
   modifyColor: PropTypes.func.isRequired,
+  duplicateRectangle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ rectangles, savedLayouts, currentLayoutName }) => ({
@@ -97,6 +101,7 @@ const mapDispatchToProps = dispatch => ({
   deleteArea: name => dispatch(deleteLayout(name)),
   adjustSize: (id, height, width) => dispatch(saveSize(id, height, width)),
   modifyColor: (id, color) => dispatch(changeColor(id, color)),
+  duplicateRectangle: id => dispatch(copyRectangle(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playground);
