@@ -1,5 +1,7 @@
 # Paint Rectangles!
 
+## [Live Demo](https://lit-cove-68497.herokuapp.com/)
+
 ### note: double-click a rectangle to get a list of options
 
 
